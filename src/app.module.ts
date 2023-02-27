@@ -9,9 +9,10 @@ import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { SharedModule } from './shared/shared.module';
 
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/todo-app'
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/todo-app', {
+    MongooseModule.forRoot(MONGO_URL, {
       connectionFactory: (connection: Connection) => {
         return connection;
       },
