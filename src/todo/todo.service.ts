@@ -28,7 +28,7 @@ export class TodoService {
 
   // Add a todo
   async addTodo(createTodoDTO: CreateTodoDTO): Promise<Todo> {
-    const newTodo = await this.todoModel(createTodoDTO);
+    const newTodo = await new this.todoModel(createTodoDTO);
     return newTodo.save();
   }
 
