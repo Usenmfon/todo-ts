@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 
 import { UserService } from '../shared/user.service';
 import { Payload } from '../interfaces/payload.interface';
@@ -16,7 +16,7 @@ export class AuthController {
   async login(@Body() userDTO: LoginDTO) {
     const user = await this.userService.findByLogin(userDTO);
     const payload = {
-      email: user.email      
+      email: user.email,
     };
     const token = await this.authService.signPayload(payload);
     return { user, token };
@@ -26,7 +26,7 @@ export class AuthController {
   async register(@Body() userDTO: RegisterDTO) {
     const user = await this.userService.create(userDTO);
     const payload: Payload = {
-      email: user.email
+      email: user.email,
     };
     const token = await this.authService.signPayload(payload);
     return { user, token };

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { UserSchema } from './user.schema';
@@ -13,7 +13,7 @@ import { UserService } from './user.service';
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
-    },    
+    },
   ],
   exports: [UserService],
 })

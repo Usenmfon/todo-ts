@@ -6,10 +6,8 @@ import { AuthController } from './auth.controller';
 import { SharedModule } from '../shared/shared.module';
 
 @Module({
-  imports: [
-    SharedModule
-  ],
-  providers: [AuthService, JwtStrategy],  
+  imports: [SharedModule],
+  providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

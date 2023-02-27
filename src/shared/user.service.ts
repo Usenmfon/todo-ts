@@ -49,8 +49,4 @@ export class UserService {
     const { email } = payload;
     return await this.userModel.findOne({ email });
   }
-
- /* sanitizeUser(user: User) {
-    return user.depopulate('password');
-  }*/
 }
