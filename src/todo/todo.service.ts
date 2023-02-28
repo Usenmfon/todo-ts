@@ -14,15 +14,15 @@ export class TodoService {
     return this.todoModel.find().exec();
   }
 
-  // Get a todo
-  async getTodoById(id: string): Promise<Todo> {
-    const todo = await this.todoModel.findById(id).exec();
-    return todo;
-  }
-
   // Get a todo by category
   async getTodoByCategory(cat: string): Promise<Todo[]> {
     const todo = await this.todoModel.find({ category: cat }).exec();
+    return todo;
+  }
+
+  // Get a todo
+  async getTodoById(id: string): Promise<Todo> {
+    const todo = await this.todoModel.findById(id).exec();
     return todo;
   }
 
