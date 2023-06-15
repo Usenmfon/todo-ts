@@ -10,8 +10,8 @@ export class TodoService {
   constructor(@InjectModel('Todo') private readonly todoModel: Model<Todo>) {}
 
   // Get all todos
-  async getAllTodo(): Promise<Todo[]> {
-    return this.todoModel.find().exec();
+  async getAllTodo(user): Promise<Todo[]> {
+    return this.todoModel.find({ user: user._id }).exec();
   }
 
   // Get a todo by category
@@ -27,7 +27,8 @@ export class TodoService {
   }
 
   // Add a todo
-  async addTodo(createTodoDTO: CreateTodoDTO): Promise<Todo> {
+  async addTodo(user, createTodoDTO: CreateTodoDTO): Promise<Todo> {
+    createTodoDTO.user = user._id;
     const newTodo = await new this.todoModel(createTodoDTO);
     return newTodo.save();
   }

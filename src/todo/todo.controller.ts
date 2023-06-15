@@ -12,6 +12,8 @@ import { TodoService } from './todo.service';
 import { CreateTodoDTO } from './dto/create-todo.dto';
 import { Todo } from './interfaces/todo.interface';
 import { AuthGuard } from '@nestjs/passport';
+import { GetAuthUser } from 'src/auth/decorators/auth.decorator';
+import { IAuthUser } from 'src/interfaces/auth.interface';
 
 @Controller('todo')
 export class TodoController {
@@ -19,15 +21,19 @@ export class TodoController {
 
   //add a todo
   @Post()
-  // @UseGuards(AuthGuard('jwt'))
-  async addTodo(@Body() createTodoDTO: CreateTodoDTO) {
-    return this.todoService.addTodo(createTodoDTO);
+  @UseGuards(AuthGuard('jwt'))
+  async addTodo(
+    @GetAuthUser() user: IAuthUser,
+    @Body() createTodoDTO: CreateTodoDTO,
+  ) {
+    return this.todoService.addTodo(user, createTodoDTO);
   }
 
   //get all todos
   @Get()
-  async getAllTodos(): Promise<Todo[]> {
-    return this.todoService.getAllTodo();
+  @UseGuards(AuthGuard('jwt'))
+  async getAllTodos(@GetAuthUser() user: IAuthUser): Promise<Todo[]> {
+    return this.todoService.getAllTodo(user);
   }
 
   //get a todo by category
