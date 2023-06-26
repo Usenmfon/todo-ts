@@ -12,7 +12,7 @@ export class AuthController {
     private authService: AuthService,
   ) {}
 
-  @Post('login')
+  @Post('signin')
   async login(@Body() userDTO: LoginDTO) {
     const user = await this.userService.findByLogin(userDTO);
     const payload = {
@@ -22,7 +22,7 @@ export class AuthController {
     return { user, token };
   }
 
-  @Post('register')
+  @Post('signup')
   async register(@Body() userDTO: RegisterDTO) {
     const user = await this.userService.create(userDTO);
     const payload: Payload = {
